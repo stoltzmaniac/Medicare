@@ -11,11 +11,16 @@ data = read.csv('./Infections/data/Healthcare_Associated_Infections_-_Hospital.c
 
 data$zip = clean.zipcodes(data$ZIP.Code)
 data(zipcode)
-data=merge(data,zipcode,by.x="zip",by.y="zip",)
-
+data=merge(data,zipcode,by.x="zip",by.y="zip")
 
 ggmap(get_map(location = "United States",
               zoom=4,
               maptype = 'terrain',
               color = "bw")) + 
-  geom_point(data=data, aes(x=longitude,y=latitude), color='red')
+  
+  geom_point(data=data %>% 
+               filter(Compared.to.National != 'Not Available') %>%
+               filter(Compared.to.National != 'No Different than National Benchmark'), 
+             aes(x=longitude,
+                 y=latitude,
+                 color=Compared.to.National))
