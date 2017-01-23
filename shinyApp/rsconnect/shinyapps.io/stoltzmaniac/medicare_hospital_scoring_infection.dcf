@@ -1,0 +1,10 @@
+name: medicare_hospital_scoring_infection
+title: Medicare Hospital Scoring (Infection)
+account: stoltzmaniac
+server: shinyapps.io
+appId: 152681
+bundleId: 688131
+url: https://stoltzmaniac.shinyapps.io/medicare_hospital_scoring_infection/
+when: 1485181662.50203
+asMultiple: FALSE
+asStatic: FALSE

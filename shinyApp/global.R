@@ -17,7 +17,7 @@ data=merge(data,zipcode,by.x="zip",by.y="zip")
 data$latlon = paste(data$latitude,data$longitude)
 
 df = data %>%
-  select(City,State,latitude,longitude,Score,Measure.Name,Hospital.Name,ZIP.Code,latlon,Address,Phone.Number)
+  select(City,State,latitude,longitude,Score,Compared.to.National,Measure.Name,Hospital.Name,ZIP.Code,latlon,Address,Phone.Number)
 
 rm(data)
 

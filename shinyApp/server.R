@@ -39,7 +39,7 @@ shinyServer(
         filter(State == input$stateFilter) %>%
         filter(City == input$cityFilter) %>%
         arrange(Measure.Name) %>%
-        select(Measure.Name,latlon,Hospital.Name,Score,Address,Phone.Number)
+        select(Measure.Name,latlon,Hospital.Name,Score,Compared.to.National,Address,Phone.Number)
       
     })
     
