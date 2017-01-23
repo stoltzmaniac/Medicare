@@ -14,17 +14,17 @@ data = dbFetch(rs)
 data$zip = clean.zipcodes(data$ZIP.Code)
 data(zipcode)
 data=merge(data,zipcode,by.x="zip",by.y="zip")
+data$latlon = paste(data$latitude,data$longitude)
 
 df = data %>%
-  select(City,State,latitude,longitude,Score,Measure.Name,Hospital.Name)
+  select(City,State,latitude,longitude,Score,Measure.Name,Hospital.Name,ZIP.Code,latlon,Address,Phone.Number)
 
 rm(data)
-
-pMap = ggmap(get_map(location = "United States",
-                     zoom=4,
-                     maptype = 'terrain',
-                     color = "bw")) 
 
 
 ###Input Filter Options
 stateChoices = sort(unique(df$State))
+cityChoices = sort(unique(df$City))
+zipcodeChoices = sort(unique(df$ZIP.Code))
+hospitalChoices = sort(unique(df$Hospital.Name))
+measureNameChoices = sort(unique(df$Measure.Name))

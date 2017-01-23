@@ -13,8 +13,8 @@ data$zip = clean.zipcodes(data$ZIP.Code)
 data(zipcode)
 data=merge(data,zipcode,by.x="zip",by.y="zip")
 
-pMap = ggmap(get_map(location = "United States",
-              zoom=4,
+pMap = ggmap(get_map(location = "80526",
+              zoom=10,
               maptype = 'terrain',
               color = "bw")) 
   

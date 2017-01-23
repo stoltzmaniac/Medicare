@@ -2,15 +2,38 @@ shinyUI(fluidPage(
   titlePanel("Medicare Data"),
   
   sidebarLayout(
+    
+    fluidRow(
+    
     sidebarPanel(
       helpText("Pick One:"),
       
       selectInput("stateFilter", 
-                  label = "pick one",
+                  label = "State:",
                   choices = stateChoices,
-                  selected=stateChoices[1])
+                  selected = 'CO'),
+      
+      selectInput("cityFilter",
+                  label = 'City:',
+                choices = cityChoices,
+                selected = 'FORT COLLINS'),
+      
+      submitButton('Submit')
+      
+    )
+      
     ),
     
-    mainPanel(plotOutput("chart"))
+    mainPanel(
+      fluidRow(
+      plotOutput("chart",width='100%')
+      ),
+      
+      br(),
+      br(),
+      
+      fluidRow(
+      dataTableOutput("dataTable"))
+    )
   )
 ))
