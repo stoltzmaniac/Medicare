@@ -1,6 +1,7 @@
 library(RSQLite)
 library(ggmap)
 library(ggplot2)
+library(plotly)
 
 shinyServer(
   function(input, output){
@@ -12,12 +13,11 @@ shinyServer(
         filter(State == input$stateFilter) %>%
         filter(City == input$cityFilter)
 
-      p = ggplot(tmp,aes(x=reorder(Measure.Name,Score),y=Score,fill=Hospital.Name))
-      p + geom_bar(stat='identity',position='dodge') + 
-#        facet_wrap(~Hospital.Name,ncol=1) + 
+      p = ggplot(tmp,aes(x=reorder(Measure.Name,Score),y=Score,fill=Hospital.Name)) + geom_bar(stat='identity',position='dodge') + 
         coord_flip() + 
         theme(legend.position = 'none')
-      
+      p 
+      # ggplotly(p)
       # pMap = ggmap(get_map(location = input$zipcodeFilter,
       #                      zoom=8,
       #                      maptype = 'terrain',
