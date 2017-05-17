@@ -6,8 +6,7 @@ library(plotly)
 shinyServer(
   function(input, output){
     
-    output$chart = renderPlot({
-      
+    getData <- reactive({
       tmp = df %>% filter(!is.na(Score))
       
       if(input$stateFilter != ALL_FILTER_NAME){
@@ -19,10 +18,13 @@ shinyServer(
       if(input$measureFilter != ALL_FILTER_NAME){
         tmp <- tmp %>% filter(Measure.Name == input$measureFilter)
       }
-      tmp <- tmp %>% top_n(input$maxResults)
+      return(tmp %>% top_n(input$maxResults))
+    })
+    
+    output$chart = renderPlot({
+      
+      tmp <- getData()
 
-      print(str(tmp))
-      print(tmp$Score)
       p = ggplot(tmp, aes(x=reorder(Hospital.Name, Score), y=Score)) + geom_bar(stat='identity', position='dodge') + 
         coord_flip() + 
         theme(text = element_text(size=16)) + 
@@ -47,18 +49,7 @@ shinyServer(
     
     output$dataTable = renderDataTable({
       
-      tmp = df %>% filter(!is.na(Score))
-      
-      if(input$stateFilter != ALL_FILTER_NAME){
-        tmp <- tmp %>% filter(State == input$stateFilter)
-      }
-      if(input$cityFilter != ALL_FILTER_NAME){
-        tmp <- tmp %>% filter(City == input$cityFilter)
-      }
-      if(input$measureFilter != ALL_FILTER_NAME){
-        tmp <- tmp %>% filter(Measure.Name == input$measureFilter)
-      }
-      tmp <- tmp %>% top_n(input$maxResults)
+      tmp <- getData()
       
       tmp %>% arrange(Measure.Name) %>%
         select(Measure.Name,latlon,Hospital.Name,Score,Compared.to.National,Address,Phone.Number)
