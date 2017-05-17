@@ -6,16 +6,31 @@ library(plotly)
 shinyServer(
   function(input, output){
     
+    getData <- reactive({
+      tmp = df %>% filter(!is.na(Score))
+      
+      if(input$stateFilter != ALL_FILTER_NAME){
+        tmp <- tmp %>% filter(State == input$stateFilter)
+      }
+      if(input$cityFilter != ALL_FILTER_NAME){
+        tmp <- tmp %>% filter(City == input$cityFilter)
+      }
+      if(input$measureFilter != ALL_FILTER_NAME){
+        tmp <- tmp %>% filter(Measure.Name == input$measureFilter)
+      }
+      return(tmp %>% top_n(input$maxResults))
+    })
+    
     output$chart = renderPlot({
       
-      tmp = df %>%
-        filter(Score != 'Not Available') %>%
-        filter(State == input$stateFilter) %>%
-        filter(City == input$cityFilter)
+      tmp <- getData()
 
-      p = ggplot(tmp,aes(x=reorder(Measure.Name,Score),y=Score,fill=Hospital.Name)) + geom_bar(stat='identity',position='dodge') + 
+      p = ggplot(tmp, aes(x=reorder(Hospital.Name, Score), y=Score)) + geom_bar(stat='identity', position='dodge') + 
         coord_flip() + 
-        theme(legend.position = 'none')
+        theme(text = element_text(size=16)) + 
+        scale_y_sqrt(labels = comma) +
+        ggtitle(paste("Scores per hospital for measure:", input$measureFilter)) +
+        xlab("Hospital name")
       p 
       # ggplotly(p)
       # pMap = ggmap(get_map(location = input$zipcodeFilter,
@@ -34,13 +49,10 @@ shinyServer(
     
     output$dataTable = renderDataTable({
       
-      df %>%
-        filter(Score != 'Not Available') %>%
-        filter(State == input$stateFilter) %>%
-        filter(City == input$cityFilter) %>%
-        arrange(Measure.Name) %>%
-        select(Measure.Name,latlon,Hospital.Name,Score,Compared.to.National,Address,Phone.Number)
+      tmp <- getData()
       
+      tmp %>% arrange(Measure.Name) %>%
+        select(Measure.Name,latlon,Hospital.Name,Score,Compared.to.National,Address,Phone.Number)
     })
     
   }
