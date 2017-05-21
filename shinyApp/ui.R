@@ -30,7 +30,7 @@ shinyUI(fluidPage(
                   tabPanel('Measure per hospital plot', 
                     fluidRow(plotOutput("chart",width='100%', height = '800px'))
                   ),
-                  tabPanel('Leaflet',
+                  tabPanel('Measure per hospital map',
                     fluidRow(leafletOutput("map", height = "800px"))
                   ),
                   tabPanel("Data",       

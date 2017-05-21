@@ -1,7 +1,4 @@
-library(RSQLite)
-library(ggmap)
-library(ggplot2)
-library(plotly)
+#
 
 shinyServer(function(input, output, session){
     
@@ -35,8 +32,22 @@ shinyServer(function(input, output, session){
     
     output$dataTable = renderDataTable({
       df_filtered <- getMeasureData()
-      df_filtered %>% arrange(Measure.Name) %>%
+      result <- df_filtered %>% arrange(Measure.Name, -Score) %>%
         select(Measure.Name,latlon,Hospital.Name,Score,Compared.to.National,Address,Phone.Number)
+      
+      # Hide some columns
+      hideCols <- grep("latlon", colnames(result)) - 1
+      datatable(result, rownames = FALSE, extensions = 'Buttons', class = "compact",
+                options = list(pageLength = MAX_ITEMS_PER_PAGE, 
+                               lengthMenu = LENGTH_MENU,
+                               paging = TABLE_PAGING,
+                               pagingType='simple',
+                               dom = 'Blfrtip',
+                               columnDefs = list(list(visible = FALSE, targets = hideCols)), # hide columns
+                               buttons = list(list(extend = 'csv', exportOptions = list(columns = ':visible')), list(extend = 'pdf', exportOptions = list(columns = ':visible')),
+                                              list(extend = 'colvis', text='Show/Hide Columns', collectionLayout='fixed two-column'))
+                              )
+                )
     })
     
     # map with all locations 
@@ -71,5 +82,7 @@ shinyServer(function(input, output, session){
       })
     })
     
+    
+    ## TODO average relative score
   }
 )
