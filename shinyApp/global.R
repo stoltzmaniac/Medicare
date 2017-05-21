@@ -22,7 +22,6 @@ df = data %>%
   select(City,State,latitude,longitude,Score,Compared.to.National,Measure.Name,Hospital.Name,ZIP.Code,latlon,Address,Phone.Number)
 rm(data)
 
-
 ###Input Filter Options
 ALL_FILTER_NAME <- "All"
 stateChoices = c(ALL_FILTER_NAME, sort(unique(df$State)))
@@ -35,7 +34,12 @@ measureNameChoices = factor(c(ALL_FILTER_NAME, sort(unique(df$Measure.Name))))
 df$Measure.Name <- as.factor(df$Measure.Name)
 df$Score <- as.numeric(df$Score)
 
+# Slider properties
+SLIDER_MIN_VALUE <- 0
+SLIDER_MAX_VALUE <- 100
+SLIDER_INIT_VALUE <- 25
+
 # Datatable properties
-MAX_ITEMS_PER_PAGE <- 20
+MAX_ITEMS_PER_PAGE <- SLIDER_INIT_VALUE
 TABLE_PAGING <- TRUE
 LENGTH_MENU <- c(5, 10, 15, 20, 25, 50, 75, 100)
