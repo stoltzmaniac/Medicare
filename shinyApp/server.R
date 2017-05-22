@@ -47,7 +47,10 @@ shinyServer(function(input, output, session){
                                buttons = list(list(extend = 'csv', exportOptions = list(columns = ':visible')), list(extend = 'pdf', exportOptions = list(columns = ':visible')),
                                               list(extend = 'colvis', text='Show/Hide Columns', collectionLayout='fixed two-column'))
                               )
-                )
+                ) %>%
+      formatStyle(FORMAT_COLUMN, target = 'row',
+                  backgroundColor = styleEqual(c(FORMAT_COLUMN_VALUE, FORMAT_COLUMN_VALUE_WARN), c(FORMAT_COLUMN_COLOR, FORMAT_COLUMN_COLOR_WARN)))
+      
     })
     
     # map with all locations 
