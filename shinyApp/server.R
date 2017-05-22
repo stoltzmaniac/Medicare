@@ -33,10 +33,10 @@ shinyServer(function(input, output, session){
     output$dataTable = renderDataTable({
       df_filtered <- getMeasureData()
       result <- df_filtered %>% arrange(Measure.Name, -Score) %>%
-        select(Measure.Name,latlon,Hospital.Name,Score,Compared.to.National,Address,Phone.Number)
+        select(Measure.Name,latlon,Hospital.Name,Score,Compared.to.National,State,City,Address,Phone.Number)
       
       # Hide some columns
-      hideCols <- grep("latlon", colnames(result)) - 1
+      hideCols <- grep("latlon|Address|Phone.Number", colnames(result)) - 1
       datatable(result, rownames = FALSE, extensions = 'Buttons', class = "compact",
                 options = list(pageLength = MAX_ITEMS_PER_PAGE, 
                                lengthMenu = LENGTH_MENU,
