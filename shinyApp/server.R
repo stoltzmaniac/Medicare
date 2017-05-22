@@ -81,8 +81,5 @@ shinyServer(function(input, output, session){
         showPopup(event$id, event$lat, event$lng)
       })
     })
-    
-    
-    ## TODO average relative score
   }
 )
