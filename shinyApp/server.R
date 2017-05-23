@@ -15,7 +15,8 @@ shinyServer(function(input, output, session){
       if(input$measureFilter != ALL_FILTER_NAME){
         tmp <- tmp %>% filter(Measure.Name == input$measureFilter)
       }
-      return(tmp %>% top_n(input$maxResults))
+      tmp <- tmp %>% arrange(-Score)
+      return(tmp %>% head(input$maxResults))
     })
     
     # create plot
