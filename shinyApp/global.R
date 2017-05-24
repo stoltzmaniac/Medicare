@@ -29,7 +29,7 @@ stateChoices = c(ALL_FILTER_NAME, sort(unique(df$State)))
 cityChoices = c(ALL_FILTER_NAME, sort(unique(df$City)))
 zipcodeChoices = c(ALL_FILTER_NAME, sort(unique(df$ZIP.Code)))
 hospitalChoices = c(ALL_FILTER_NAME, sort(unique(df$Hospital.Name)))
-measureNameChoices = factor(c(ALL_FILTER_NAME, sort(unique(df$Measure.Name))))
+measureNameChoices = factor(c(sort(unique(df$Measure.Name))))
 
 # Change types
 df$Measure.Name <- as.factor(df$Measure.Name)
