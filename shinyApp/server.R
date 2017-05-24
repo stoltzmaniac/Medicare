@@ -1,4 +1,4 @@
-#
+# Medicare server part
 
 shinyServer(function(input, output, session){
     
@@ -19,16 +19,19 @@ shinyServer(function(input, output, session){
       return(tmp %>% head(input$maxResults))
     })
     
-    # create plot
-    output$chart = renderPlot({
+    # interactive plot
+    output$chart = renderPlotly({
       df_filtered <- getMeasureData()
-      p = ggplot(df_filtered, aes(x=reorder(Hospital.Name, Score), y=Score)) + geom_bar(stat='identity', position='dodge') + 
-        coord_flip() + 
-        theme(text = element_text(size=16)) + 
-        scale_y_sqrt(labels = comma) +
-        ggtitle(paste("Scores per hospital for measure:", input$measureFilter)) +
-        xlab("Hospital name")
-      p
+      # change to factor otherwise plotly doesn't display it in right order
+      df_filtered$Hospital.Name <- factor(df_filtered$Hospital.Name, levels = rev(df_filtered$Hospital.Name))
+
+      #margin and plot
+      m <- list(l = 300, r = 0, b = 40, t = 40, pad = 4)
+      plot_ly(df_filtered, x = ~Score, y = ~Hospital.Name, type = "bar", hoverinfo = 'text', text = ~paste('State: ', State, 
+                                                                                                           '</br> City: ', City,
+                                                                                                           '</br> Score: ', Score)) %>% 
+        layout(title = paste("Scores per hospital for measure:", input$measureFilter), xaxis = list(title = "Score"), yaxis = list(title = ""), margin = m) %>%
+        config(displayModeBar = F) 
     })
     
     output$dataTable = renderDataTable({
