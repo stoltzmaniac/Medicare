@@ -21,19 +21,19 @@ shinyUI(fluidPage(
                   choices = measureNameChoices,
                   selected = 'CAUTI: Predicted Cases'),
       
-      sliderInput("maxResults", "Maximum results", min = 0, max = 100, value = 20)
+      sliderInput("maxResults", "Maximum results", min = SLIDER_MIN_VALUE, max = SLIDER_MAX_VALUE, value = SLIDER_INIT_VALUE)
       
     , width = 2),
 
     mainPanel(
       tabsetPanel(id='main',
-                  tabPanel('Measure per hospital plot', 
+                  tabPanel('Measure per hospital plot', p(),
                     fluidRow(plotOutput("chart",width='100%', height = '800px'))
                   ),
-                  tabPanel('Leaflet',
+                  tabPanel('Measure per hospital map', p(),
                     fluidRow(leafletOutput("map", height = "800px"))
                   ),
-                  tabPanel("Data",       
+                  tabPanel("Measure per hospital data", p(),      
                     fluidRow(dataTableOutput("dataTable"))
                   )
       )

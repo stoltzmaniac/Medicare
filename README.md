@@ -10,4 +10,4 @@ I created a sqlite database within there to improve speed and performance - I be
 
 I would love some help with this so please submit whatever changes you would like to see. I haven't put very much time into it yet but will be doing so in early June (2017).
 
-It will be located on shinyapps.io for now.
+The application is available at https://stoltzmaniac.shinyapps.io/medicare_data/
