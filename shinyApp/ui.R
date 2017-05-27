@@ -18,8 +18,13 @@ shinyUI(fluidPage(
       
       selectInput("measureFilter",
                   label = 'Measure:',
-                  choices = measureNameChoices,
-                  selected = 'CAUTI: Predicted Cases'),
+                  choices = measureChoices,
+                  selected = 'CAUTI'),
+
+      selectInput("metricFilter",
+                  label = 'Metric:',
+                  choices = metricChoices,
+                  selected = 'Predicted Cases'),
       
       sliderInput("maxResults", "Maximum results", min = SLIDER_MIN_VALUE, max = SLIDER_MAX_VALUE, value = SLIDER_INIT_VALUE)
       

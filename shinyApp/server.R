@@ -13,8 +13,12 @@ shinyServer(function(input, output, session){
         tmp <- tmp %>% filter(City == input$cityFilter)
       }
       if(input$measureFilter != ALL_FILTER_NAME){
-        tmp <- tmp %>% filter(Measure.Name == input$measureFilter)
+        tmp <- tmp %>% filter(Measure == input$measureFilter)
       }
+      if(input$metricFilter != ALL_FILTER_NAME){
+        tmp <- tmp %>% filter(Metric == input$metricFilter)
+      }
+      
       tmp <- tmp %>% arrange(-Score)
       return(tmp %>% head(input$maxResults))
     })

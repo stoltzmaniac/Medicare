@@ -1,8 +1,9 @@
 library(RSQLite)
+library(stringr)
 library(ggmap)
 library(ggplot2)
 library(zipcode)
-library(dplyr)
+library(tidyverse)
 library(scales)
 library(leaflet)
 library(DT)
@@ -20,19 +21,25 @@ data=merge(data,zipcode,by.x="zip",by.y="zip")
 data$latlon = paste(data$latitude,data$longitude)
 
 df = data %>%
-  select(City,State,latitude,longitude,Score,Compared.to.National,Measure.Name,Hospital.Name,ZIP.Code,latlon,Address,Phone.Number)
+  select(City,State,latitude,longitude,Score,Compared.to.National,Measure.Name,Hospital.Name,ZIP.Code,latlon,Address,Phone.Number) %>%
+  mutate(Measure.Split = Measure.Name) %>%
+  separate(Measure.Split,c("Infection","Metric"),extra='merge',fill='right')
 rm(data)
-
+  
 ###Input Filter Options
 ALL_FILTER_NAME <- "All"
 stateChoices = c(ALL_FILTER_NAME, sort(unique(df$State)))
 cityChoices = c(ALL_FILTER_NAME, sort(unique(df$City)))
 zipcodeChoices = c(ALL_FILTER_NAME, sort(unique(df$ZIP.Code)))
 hospitalChoices = c(ALL_FILTER_NAME, sort(unique(df$Hospital.Name)))
-measureNameChoices = factor(c(sort(unique(df$Measure.Name))))
+#measureNameChoices = factor(c(sort(unique(df$Measure.Name))))
+infectionChoices = factor(c(sort(unique(df$Infection))))
+metricChoices = factor(c(sort(unique(df$Metric))))
 
 # Change types
 df$Measure.Name <- as.factor(df$Measure.Name)
+df$Measure = as.factor(df$Infection)
+df$Metric = as.factor(df$Metric)
 df$Score <- as.numeric(df$Score)
 
 # Slider properties
