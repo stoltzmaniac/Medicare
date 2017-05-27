@@ -16,9 +16,9 @@ shinyUI(fluidPage(
                   choices = cityChoices,
                   selected = ALL_FILTER_NAME),
       
-      selectInput("measureFilter",
+      selectInput("infectionFilter",
                   label = 'Measure:',
-                  choices = measureChoices,
+                  choices = infectionChoices,
                   selected = 'CAUTI'),
 
       selectInput("metricFilter",

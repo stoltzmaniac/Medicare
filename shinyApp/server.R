@@ -12,8 +12,8 @@ shinyServer(function(input, output, session){
       if(input$cityFilter != ALL_FILTER_NAME){
         tmp <- tmp %>% filter(City == input$cityFilter)
       }
-      if(input$measureFilter != ALL_FILTER_NAME){
-        tmp <- tmp %>% filter(Measure == input$measureFilter)
+      if(input$infectionFilter != ALL_FILTER_NAME){
+        tmp <- tmp %>% filter(Infection == input$infectionFilter)
       }
       if(input$metricFilter != ALL_FILTER_NAME){
         tmp <- tmp %>% filter(Metric == input$metricFilter)
