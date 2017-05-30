@@ -1,0 +1,62 @@
+<h2>Hospital Infection Scores - R Shiny App</h2>
+
+<p>About two weeks ago I created an extremely rough version of an R Shiny Application surrounding Medicare data. Right after publishing the blog post, I received a lot of input for improvement and help from others. </p>
+
+<p>Here&#39;s a look a look at the latest version of the <a href="https://stoltzmaniac.shinyapps.io/medicare_data/">Medicare Shiny App</a>. This utilizes data.gov <a href="https://catalog.data.gov/dataset/healthcare-associated-infections-hospital-3ca5e">found here</a>.</p>
+
+<p>I was traveling for two weeks and had very little time to do any work on it. After creating a <a href="https://github.com/stoltzmaniac/Medicare/tree/master/shinyApp">GitHub Repository</a> for it, the user <a href="https://github.com/ginberg">Ginsberg</a> played a huge role in cleaning it up and adding a lot more functionality. I found it incredible that a complete stranger to me would put in such effort to something like this. In fact, he isn&#39;t even a resident of the USA - so Medicare probably isn&#39;t on his radar as often as it is for some of us. Fantastic generosity! </p>
+
+<p>Ultimately, I will be looking to keep this project alive and grow it to fully utilize a lot more of the Medicare data available. The infections data set was very simple and easy to use, so I started off with it but there are a lot more tables listed on data.gov. The purpose of this application is to allow people who don&#39;t want to spend time digging through tables to utilize the information available. This isn&#39;t necessarily just for people seeking care to make a decision but this could perhaps be utilized for others doing research regarding hospitals in the US.</p>
+
+<p>The R Shiny App allows you to filter by location and infection information. These are important in helping to actually find information on what you care about.</p>
+
+<p>Three key tabs were created by (@Ginsberg):  </p>
+
+<ul>
+<li>Sorting hospitals by infection score</li>
+<li>Maps of hospitals in the area</li>
+<li>Data table of hospital data</li>
+</ul>
+
+<hr/>
+
+<h4>Sorting hospital data by score:</h4>
+
+<ul>
+<li>This is a tricky plot because &ldquo;score&rdquo; is different for each type of metric</li>
+<li>Higher &ldquo;scores&rdquo; aren&#39;t necessarily bad because they can be swayed by more heavily populated areas (or density)</li>
+<li>Notice the use of plotly and its interactivity</li>
+</ul>
+
+<p><img src="https://www.stoltzmaniac.com/content/images/2017/05/blog_2_01.png" alt=""/></p>
+
+<hr/>
+
+<h4>Map of the data:</h4>
+
+<ul>
+<li>Location of the hospitals is incredibly important if you happen to live in a certain area</li>
+<li>The radius of the circle allows for easy identification of places with larger &ldquo;scores&rdquo;</li>
+<li>Hovering and clicking the circle will display more information</li>
+</ul>
+
+<p><img src="https://www.stoltzmaniac.com/content/images/2017/05/blog_2_02.png" alt=""/></p>
+
+<hr/>
+
+<h4>Displaying the data in table format:</h4>
+
+<ul>
+<li>This allows for visibility into the raw data that is populating the other tabs</li>
+<li>It provides the ability to download a CSV or PDF file containing the relevant information</li>
+<li>More information may be added such as the address and telephone number of the hospital - depending on the direction of the app</li>
+</ul>
+
+<p><img src="https://www.stoltzmaniac.com/content/images/2017/05/blog_2_03.png" alt=""/></p>
+
+<p>Again, I want to give a big thanks to <a href="https://github.com/ginberg">Ginsberg</a> for essentially creating 95% of what makes this app great!</p>
+
+<p>Here&#39;s the link to the <a href="https://stoltzmaniac.shinyapps.io/medicare_data/">Medicare Shiny App</a>.  </p>
+
+<p>You can find the code on my <a href="https://github.com/stoltzmaniac/Medicare">GitHub</a>.</p>
+
