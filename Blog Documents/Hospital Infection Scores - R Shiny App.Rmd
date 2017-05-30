@@ -11,13 +11,13 @@ About two weeks ago I created an extremely rough version of an R Shiny Applicati
 
 Here's a look a look at the latest version of the [Medicare Shiny App](https://stoltzmaniac.shinyapps.io/medicare_data/). This utilizes data.gov [found here](https://catalog.data.gov/dataset/healthcare-associated-infections-hospital-3ca5e).
 
-I was traveling for two weeks and had very little time to do any work on it. After creating a [GitHub Repository](https://github.com/stoltzmaniac/Medicare/tree/master/shinyApp) for it, the user [Ginsberg](https://github.com/ginberg) played a huge role in cleaning it up and adding a lot more functionality. I found it incredible that a complete stranger to me would put in such effort to something like this. In fact, he isn't even a resident of the USA - so Medicare probably isn't on his radar as often as it is for some of us. Fantastic generosity! 
+I was traveling for two weeks and had very little time to do any work on it. After creating a [GitHub Repository](https://github.com/stoltzmaniac/Medicare/tree/master/shinyApp) for it, the user [Ginberg](https://github.com/ginberg) played a huge role in cleaning it up and adding a lot more functionality. I found it incredible that a complete stranger to me would put in such effort to something like this. In fact, he isn't even a resident of the USA - so Medicare probably isn't on his radar as often as it is for some of us. Fantastic generosity! 
 
 Ultimately, I will be looking to keep this project alive and grow it to fully utilize a lot more of the Medicare data available. The infections data set was very simple and easy to use, so I started off with it but there are a lot more tables listed on data.gov. The purpose of this application is to allow people who don't want to spend time digging through tables to utilize the information available. This isn't necessarily just for people seeking care to make a decision but this could perhaps be utilized for others doing research regarding hospitals in the US.
 
 The R Shiny App allows you to filter by location and infection information. These are important in helping to actually find information on what you care about.
 
-Three key tabs were created by (@Ginsberg):  
+Three key tabs were created by (@Ginberg):  
 
   * Sorting hospitals by infection score
   * Maps of hospitals in the area
@@ -58,7 +58,7 @@ Three key tabs were created by (@Ginsberg):
 ![](https://www.stoltzmaniac.com/content/images/2017/05/blog_2_03.png)
 
 
-Again, I want to give a big thanks to [Ginsberg](https://github.com/ginberg) for essentially creating 95% of what makes this app great!
+Again, I want to give a big thanks to [Ginberg](https://github.com/ginberg) for essentially creating 95% of what makes this app great!
 
 Here's the link to the [Medicare Shiny App](https://stoltzmaniac.shinyapps.io/medicare_data/).  
 
