@@ -9,12 +9,12 @@ shinyUI(fluidPage(
       selectInput("stateFilter", 
                   label = "State:",
                   choices = stateChoices,
-                  selected = ALL_FILTER_NAME),
+                  selected = 'CA'),
       
       selectInput("cityFilter",
                   label = 'City:',
                   choices = cityChoices,
-                  selected = ALL_FILTER_NAME),
+                  selected = 'LOS ANGELES'),
       
       selectInput("infectionFilter",
                   label = 'Infection:',
