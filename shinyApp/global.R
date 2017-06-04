@@ -14,6 +14,7 @@ library(plotly)
 #Due to the size of the data, an sqlite database was created - this can be refreshed by uncommenting the area below
 
 ######## USE THIS TO DOWNLOAD AND REFRESH THE DATA - FROM THE CSV FILE ONLINE ###########
+### At the time of the creation of this sqlite database - all data "Measure.Start.Date" and "Measure.End.Date" were "07/01/2015" and "06/30/2016"
 # medicare.csv.data = read.csv('https://data.medicare.gov/api/views/77hc-ibv8/rows.csv?accessType=DOWNLOAD')
 # con = dbConnect(RSQLite::SQLite(),dbname='medicare.sqlite')
 # dbWriteTable(con,'medicare',value=medicare.csv.data)
@@ -31,7 +32,8 @@ data$latlon = paste(data$latitude,data$longitude)
 df = data %>%
   select(City,State,latitude,longitude,Score,Compared.to.National,Measure.Name,Hospital.Name,ZIP.Code,latlon,Address,Phone.Number) %>%
   mutate(Measure.Split = Measure.Name) %>%
-  separate(Measure.Split,c("Infection","Metric"),extra='merge',fill='right')
+  separate(Measure.Split,c("Infection","Metric"),extra='merge',fill='right') %>%
+  filter(Score != 'Not Available')
 rm(data)
   
 ###Input Filter Options

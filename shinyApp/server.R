@@ -50,7 +50,7 @@ shinyServer(function(input, output, session){
     plot_ly(df_filtered, x = ~Score, y = ~Hospital.Name, type = "bar", hoverinfo = 'text', text = ~paste('State: ', State, 
                                                                                                          '</br> City: ', City,
                                                                                                          '</br> Score: ', Score)) %>% 
-      layout(title = paste("Scores per hospital for measure:", input$infectionFilter, input$metricFilter), xaxis = list(title = "Score"), yaxis = list(title = ""), margin = m) %>%
+      layout(title = paste("Metric value per hospital:", input$infectionFilter, input$metricFilter), xaxis = list(title = "Value"), yaxis = list(title = ""), margin = m) %>%
       config(displayModeBar = F) 
   })
   
@@ -60,7 +60,7 @@ shinyServer(function(input, output, session){
       select(Measure.Name,latlon,Hospital.Name,Score,Compared.to.National,State,City,Address,Phone.Number)
     
     # Hide some columns
-    hideCols <- grep("latlon|Address|Phone.Number", colnames(result)) - 1
+    hideCols <- grep("latlon|State|City", colnames(result)) - 1
     datatable(result, rownames = FALSE, extensions = 'Buttons', class = "compact",
               options = list(pageLength = MAX_ITEMS_PER_PAGE, 
                              lengthMenu = LENGTH_MENU,
