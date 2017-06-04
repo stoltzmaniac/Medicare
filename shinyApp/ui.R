@@ -19,12 +19,12 @@ shinyUI(fluidPage(
       selectInput("infectionFilter",
                   label = 'Infection:',
                   choices = infectionChoices,
-                  selected = 'CAUTI'),
+                  selected = 'MRSA'),
 
       selectInput("metricFilter",
                   label = 'Metric:',
                   choices = metricChoices,
-                  selected = 'Predicted Cases'),
+                  selected = 'Patient Days'),
       
       sliderInput("maxResults", "Maximum results", min = SLIDER_MIN_VALUE, max = SLIDER_MAX_VALUE, value = SLIDER_INIT_VALUE)
       
