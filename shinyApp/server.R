@@ -50,8 +50,8 @@ shinyServer(function(input, output, session){
     plot_ly(df_filtered, x = ~Score, y = ~Hospital.Name, 
             type = "bar", color = ~Compared.to.National, colors = c('lightblue','darkgrey','darkred'), 
             hoverinfo = 'text', text = ~paste('State: ', State, 
-                                              '</br> City: ', City,
-                                              '</br> Score: ', Score)) %>%
+                                              '<br> City: ', City,
+                                              '<br> Score: ', Score)) %>%
       layout(title = paste("Metric value per hospital:", input$infectionFilter, input$metricFilter), xaxis = list(title = "Value"), yaxis = list(title = ""), margin = m) %>%
       config(displayModeBar = F) 
   })
