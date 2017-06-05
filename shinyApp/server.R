@@ -56,29 +56,6 @@ shinyServer(function(input, output, session){
       config(displayModeBar = F) 
   })
   
-  output$dataTable = renderDataTable({
-    df_filtered <- getMeasureData()
-    result <- df_filtered %>% arrange(Measure.Name, -Score) %>%
-      select(Measure.Name,latlon,Hospital.Name,Score,Compared.to.National,State,City,Address,Phone.Number)
-    
-    # Hide some columns
-    hideCols <- grep("latlon|State|City", colnames(result)) - 1
-    datatable(result, rownames = FALSE, extensions = 'Buttons', class = "compact",
-              options = list(pageLength = MAX_ITEMS_PER_PAGE, 
-                             lengthMenu = LENGTH_MENU,
-                             paging = TABLE_PAGING,
-                             pagingType='simple',
-                             dom = 'Blfrtip',
-                             columnDefs = list(list(visible = FALSE, targets = hideCols)), # hide columns
-                             buttons = list(list(extend = 'csv', exportOptions = list(columns = ':visible')), list(extend = 'pdf', exportOptions = list(columns = ':visible')),
-                                            list(extend = 'colvis', text='Show/Hide Columns', collectionLayout='fixed two-column'))
-              )
-    ) %>%
-      formatStyle(FORMAT_COLUMN, target = 'row',
-                  backgroundColor = styleEqual(c(FORMAT_COLUMN_VALUE, FORMAT_COLUMN_VALUE_WARN), c(FORMAT_COLUMN_COLOR, FORMAT_COLUMN_COLOR_WARN)))
-    
-  })
-  
   # map with all locations 
   output$map <- renderLeaflet({
     df_filtered <- getMeasureData()
@@ -123,5 +100,4 @@ shinyServer(function(input, output, session){
     updateSelectInput(session, "metricFilter", label = "Metric:", choices = unique(df_filtered$Metric))
   }, ignoreInit = TRUE)
   
-}
-)
+  })
