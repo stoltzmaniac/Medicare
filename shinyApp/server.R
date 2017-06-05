@@ -48,7 +48,7 @@ shinyServer(function(input, output, session){
     #margin and plot
     m <- list(l = 300, r = 0, b = 40, t = 40, pad = 4)
     plot_ly(df_filtered, x = ~Score, y = ~Hospital.Name, 
-            type = "bar", color = ~Compared.to.National, colors = c('lightblue','darkgrey','darkred'), 
+            type = "bar", color = ~Compared.to.National, colors = FORMAT_CHART_COLOR_LIST, 
             hoverinfo = 'text', text = ~paste('State: ', State, 
                                               '<br> City: ', City,
                                               '<br> Score: ', Score)) %>%
