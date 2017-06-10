@@ -23,7 +23,7 @@ library(plotly)
 
 con = dbConnect(RSQLite::SQLite(),dbname='medicare.sqlite')
 rs = dbSendQuery(con, "SELECT * FROM medicare") 
-data = dbFetch(rs)
+# data = dbFetch(rs)
 data$zip = clean.zipcodes(data$ZIP.Code)
 data(zipcode)
 data=merge(data,zipcode,by.x="zip",by.y="zip")
@@ -70,3 +70,8 @@ FORMAT_COLUMN_COLOR_WARN <- "salmon"
 FORMAT_COLUMN_COLOR_AVERAGE = 'lightgrey'
 FORMAT_COLUMN_COLOR_NOT_AVAILABLE = 'darkgrey'
 FORMAT_CHART_COLOR_LIST = c(FORMAT_COLUMN_COLOR,FORMAT_COLUMN_COLOR_AVERAGE,FORMAT_COLUMN_COLOR_NOT_AVAILABLE,FORMAT_COLUMN_COLOR_WARN)
+
+#a = df %>% group_by(Address,State,Measure,Metric) %>% summarise(Score = sum(Score))
+#b = a %>% spread(Metric,Score)
+#p = ggplot(b,aes(x=`Predicted Cases`,y=`Observed Cases`,col=Measure))
+#p + geom_point() + geom_abline(slope=1,intercept=0) + facet_wrap(~State)
