@@ -45,10 +45,15 @@ shinyServer(function(input, output, session){
     # change to factor otherwise plotly doesn't display it in right order
     df_filtered$Hospital.Name <- factor(df_filtered$Hospital.Name, levels = rev(df_filtered$Hospital.Name))
     
-    #margin and plot
+    #margin
     m <- list(l = 300, r = 0, b = 40, t = 40, pad = 4)
+    
+    # create a named vector of colors, so each value is associated with a color
+    global_colors <- setNames(FORMAT_CHART_COLOR_LIST, FORMAT_COLUMN_VALUES)
+    
+    #plot
     plot_ly(df_filtered, x = ~Score, y = ~Hospital.Name, 
-            type = "bar", color = ~Compared.to.National, colors = FORMAT_CHART_COLOR_LIST, 
+            type = "bar", color = ~Compared.to.National, colors = global_colors, 
             hoverinfo = 'text', text = ~paste('State: ', State, 
                                               '<br> City: ', City,
                                               '<br> Score: ', Score)) %>%

@@ -23,7 +23,7 @@ library(plotly)
 
 con = dbConnect(RSQLite::SQLite(),dbname='medicare.sqlite')
 rs = dbSendQuery(con, "SELECT * FROM medicare") 
-# data = dbFetch(rs)
+data = dbFetch(rs)
 data$zip = clean.zipcodes(data$ZIP.Code)
 data(zipcode)
 data=merge(data,zipcode,by.x="zip",by.y="zip")
@@ -64,12 +64,13 @@ LENGTH_MENU <- c(5, 10, 15, 20, 25, 50, 75, 100)
 FORMAT_COLUMN <- "Compared.to.National"
 FORMAT_COLUMN_VALUE <- "Better than the National Benchmark"
 FORMAT_COLUMN_VALUE_WARN <- "Worse than the National Benchmark"
+FORMAT_COLUMN_VALUES <- unique(df$Compared.to.National)
 FORMAT_COLUMN_COLOR <- "lightblue"
 FORMAT_COLUMN_COLOR_WARN <- "salmon"
 
 FORMAT_COLUMN_COLOR_AVERAGE = 'lightgrey'
 FORMAT_COLUMN_COLOR_NOT_AVAILABLE = 'darkgrey'
-FORMAT_CHART_COLOR_LIST = c(FORMAT_COLUMN_COLOR,FORMAT_COLUMN_COLOR_AVERAGE,FORMAT_COLUMN_COLOR_NOT_AVAILABLE,FORMAT_COLUMN_COLOR_WARN)
+FORMAT_CHART_COLOR_LIST = c(FORMAT_COLUMN_COLOR, FORMAT_COLUMN_COLOR_AVERAGE, FORMAT_COLUMN_COLOR_WARN, FORMAT_COLUMN_COLOR_NOT_AVAILABLE)
 
 #a = df %>% group_by(Address,State,Measure,Metric) %>% summarise(Score = sum(Score))
 #b = a %>% spread(Metric,Score)
